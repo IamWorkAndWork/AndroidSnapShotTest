@@ -16,7 +16,7 @@ class ProfileCardSnapshotTest : ScreenshotTest {
     val composeRule = createComposeRule()
 
     //config the ProfileCard Component version between 1 and 2
-    private val VERSION = 2
+    private val VERSION = 1
 
     @Test
     fun testProfileCardWithDefaultData() {
@@ -73,11 +73,14 @@ class ProfileCardSnapshotTest : ScreenshotTest {
         composeRule.setContent {
             when (VERSION) {
                 1 -> {
-                    ProfileCard(
-                        name = mockProfileModel.name,
+                    ProfileCard(name = mockProfileModel.name,
                         country = mockProfileModel.country,
                         profileImageUrl = mockProfileModel.profileImageUrl,
-                    )
+                        icon = null,
+                        onProfileClick = {
+                        },
+                        onMoreIconClick = {
+                        })
                 }
 
                 2 -> {
@@ -92,7 +95,7 @@ class ProfileCardSnapshotTest : ScreenshotTest {
                         },
                         onProfileClick = {
                         },
-                        onMoreVertClick = {
+                        onMoreIconClick = {
                         })
                 }
             }

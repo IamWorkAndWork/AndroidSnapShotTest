@@ -32,7 +32,7 @@ class MainViewModel : ViewModel() {
         return ProfileModel(
             name = "John Doe",
             country = "United States",
-            profileImageUrl = "https://example.com/profile.jpg"
+            profileImageUrl = null
         )
     }
 }

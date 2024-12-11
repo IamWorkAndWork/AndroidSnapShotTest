@@ -32,102 +32,60 @@ import com.example.androidsnapshottest.R
 
 @Composable
 fun ProfileCard(
+    modifier: Modifier = Modifier,
     name: String,
     country: String,
-    modifier: Modifier = Modifier,
-    profileImageUrl: String? = null,
-) {
-    Card(
-        modifier = modifier.padding(8.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            AsyncImage(
-                model = R.drawable.baseline_person_outline,
-                contentDescription = "Profile Image",
-                modifier = Modifier
-                    .size(100.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop,
-                placeholder = painterResource(id = R.drawable.ic_launcher_background)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = name,
-                style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = country,
-                style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Center,
-                color = Color.Gray
-            )
-        }
-    }
-}
-
-
-@Composable
-fun ProfileCard(
-    name: String,
-    country: String,
-    modifier: Modifier = Modifier,
     profileImageUrl: String? = null,
     icon: @Composable (() -> Unit)? = null,
-    onMoreVertClick: () -> Unit,
+    onMoreIconClick: () -> Unit,
     onProfileClick: () -> Unit,
 ) {
     Card(
-        modifier = modifier.padding(8.dp),
+        modifier = modifier
+            .padding(8.dp)
+            .clickable { onProfileClick.invoke() },
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
-       Box {
-           Column(
-               modifier = Modifier
-                   .fillMaxWidth()
-                   .padding(16.dp),
-               horizontalAlignment = Alignment.CenterHorizontally
-           ) {
-               AsyncImage(
-                   model = R.drawable.baseline_person_outline,
-                   contentDescription = "Profile Image",
-                   modifier = Modifier
-                       .size(100.dp)
-                       .clip(CircleShape),
-                   contentScale = ContentScale.Crop,
-                   placeholder = painterResource(id = R.drawable.ic_launcher_background)
-               )
-               Spacer(modifier = Modifier.height(16.dp))
-               Text(
-                   text = name,
-                   style = MaterialTheme.typography.headlineSmall,
-                   textAlign = TextAlign.Center
-               )
-               Spacer(modifier = Modifier.height(8.dp))
-               Text(
-                   text = country,
-                   style = MaterialTheme.typography.bodyMedium,
-                   textAlign = TextAlign.Center,
-                   color = Color.Gray
-               )
-           }
-           if (icon != null) {
+        Box {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                AsyncImage(
+                    model = profileImageUrl ?: R.drawable.baseline_person_outline,
+                    contentDescription = "Profile Image",
+                    modifier = Modifier
+                        .size(100.dp)
+                        .clip(CircleShape),
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(id = R.drawable.ic_launcher_background)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.headlineSmall,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = country,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center,
+                    color = Color.Gray
+                )
+            }
+            if (icon != null) {
                 IconButton(
-                    onClick = onMoreVertClick,
+                    onClick = onMoreIconClick,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                 ) {
                     icon()
                 }
             }
-       }
+        }
     }
 }
 
@@ -138,7 +96,10 @@ fun PreviewProfileCardV1() {
         name = "John Doe",
         country = "United States",
         modifier = Modifier.fillMaxWidth(),
-        profileImageUrl = "https://example.com/profile.jpg"
+        profileImageUrl = "https://example.com/profile.jpg",
+        icon = null,
+        onProfileClick = {},
+        onMoreIconClick = {}
     )
 }
 
@@ -157,6 +118,6 @@ fun PreviewProfileCardV2() {
             )
         },
         onProfileClick = {},
-        onMoreVertClick = {}
+        onMoreIconClick = {}
     )
 }

@@ -54,11 +54,6 @@ fun MainScreen(mainViewModel: MainViewModel) {
         is ViewState.Loading -> LoadingComponent()
         is ViewState.Success -> {
             val model = (viewState as? ViewState.Success)?.profile
-//            ProfileCard(
-//                name = model?.name.orEmpty(),
-//                country = model?.country.orEmpty(),
-//                profileImageUrl = model?.profileImageUrl,
-//            )
             ProfileCard(
                 name = model?.name.orEmpty(),
                 country = model?.country.orEmpty(),
@@ -71,7 +66,7 @@ fun MainScreen(mainViewModel: MainViewModel) {
                 },
                 onProfileClick = {
                 },
-                onMoreVertClick = {
+                onMoreIconClick = {
                 }
             )
         }
